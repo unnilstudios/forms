@@ -291,3 +291,46 @@ textarea {
 ::-webkit-file-upload-button {
   -webkit-appearance: button;
   font: inherit; }
+
+*:focus {
+  outline: none; }
+
+#img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; }
+
+.coverphoto {
+  width: 100%;
+  height: 120px;
+  background: url("../images/background.jpg");
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  position: relative; }
+  .coverphoto .profile_picture {
+    width: 110px;
+    height: 110px;
+    background: white;
+    position: absolute;
+    top: 65px;
+    left: 40px;
+    border-radius: 100%;
+    background-image: url("../images/profile.png");
+    background-size: 100% 100%;
+    padding: 7px;
+    border: 4px solid white; }
+
+.isRed {
+  transition: all 1s ease;
+  border: 1px solid #ff1e49; }
+  .isRed .glyphicon {
+    transition: all 1s ease;
+    color: #ff1e49; }
+
+.error {
+  color: #ff1e49;
+  display: none; }
+
+#success_message {
+  display: none; }
