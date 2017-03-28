@@ -1,4 +1,4 @@
-  // create input type date element for mozzila and ie
+   // create input type date element for mozzila and ie
 
 var datefield = document.createElement("input")
 datefield.setAttribute("type", "date")
@@ -42,8 +42,9 @@ jQuery(document).ready(function() {
   var btn = $('#btn-submit');
 
  
-
-
+  $('.close-btn').click(function(){
+    $('.overlay').removeClass('is-open');
+  });
 
   // crete on document.ready input-date for firefox and ie
   if (datefield.type!="date") { //if browser doesn't support input type="date", initialize date picker widget:
@@ -95,6 +96,20 @@ jQuery(document).ready(function() {
       isError(address, addressError);
     });
 
+    // span upload get Name from input
+    function getFileName() {
+        var varfile = upload.val().replace(/.*(\/|\\)/, '');
+        $("#val").text(varfile);
+    };
+    upload.change(function() {
+      getFileName();
+    });
+
+    // when click on span with id=span trigger click with upload input.
+    $('#val').click(function() {
+      upload.trigger('click');
+    });
+
     city.focusout(function() {
       isError(city, cityError);
     });
@@ -132,54 +147,21 @@ jQuery(document).ready(function() {
   btn.click(function(){
     
     // $.when(checkErrors()).then(fire());
-
     checkErrors();
     fire();
     // check errorSpans
     function checkErrors() {
+      // better logic plus less code
+      isError(name, nameError);
+      isError(lastName, lastNameError);
+      isError(date, dateError);
+      isError(address, addressError);
+      isError(upload, uploadError);
+      isError(city, cityError);
+      isError(zip, zipError)
 
+     
 
-      if (name.val() == "") {
-        turnOnRed(name, nameError);
-      } else {
-        turnOffRed(name, nameError);
-      }
-      
-      if (lastName.val() == "") {
-        turnOnRed(lastName, lastNameError);
-      } else {
-        turnOffRed(lastName, lastNameError);
-      }
-
-      if (date.val() == "") {
-        turnOnRed(date, dateError);
-      } else {
-        turnOffRed(date, dateError);
-      }
-
-      if (address.val() == "") {
-        turnOnRed(address, addressError);
-      } else {
-        turnOffRed(address, addressError);
-      }
-      
-      if (upload.val() == "") {
-        turnOnRed(upload, uploadError);
-      } else {
-        turnOffRed(upload, uploadError);
-      }
-
-      if (city.val() == "") {
-        turnOnRed(city, cityError);
-      } else {
-        turnOffRed(city, cityError);
-      }
-
-      if (zip.val() == "") {
-        turnOnRed(zip, zipError);
-      } else {
-        turnOffRed(zip, zipError);
-      }
 
       if (isNaN($('#phone').val()) == false) {
         turnOffRed(phone, phoneError);
@@ -203,25 +185,37 @@ jQuery(document).ready(function() {
       if ($('.input-group').hasClass('isRed')) {
         return
       } else {
+
         //ajax call
         callAJAX();
+        // show modal
+        $('.overlay').addClass('is-open');
+
+        //empty input-boxes after ajax 
+        name.val('');
+        lastName.val('');
+        date.val('');
+        address.val('');
+        city.val('');
+        zip.val('');
+        upload.val('');
+        phone.val('');
+        email.val('');
+
       }
      }
     
      function callAJAX() {
-        $('#success_message').show(500);
+      //  $('#success_message').show(500).hide(8000);
+        $('.learn-overlay').addClass('is-open');
 
-        function sex() {
-         $( "input:checked" ).val();
-        };
-         
         // get the form data
         // there are many ways to get this data using jQuery (you can use the class or id also)
         var formData = {
           'Name'             : name.val(),
           'Last Name'        : lastName.val(),
           'Date Of Birth'    : date.val(),
-          'Gender'           : sex(),
+          'Gender'           : $( "input:checked" ).val(),
           'Address'          : address.val(),
           'Picture'          : upload.val(),
           'Phone'            : phone.val(),
@@ -234,30 +228,20 @@ jQuery(document).ready(function() {
       url     : 'test.php', // the url where we want to POST
       data    : formData, // our data object
       dataType  : 'json', // what type of data do we expect back from the server
-      encode    : true
+      encode    : true,
+      success   : function(data) {
+        console.log(data);  // log data to the console so we can see
+        console.log(formData); // log form data 
+      },
+      fail      : function(data) { // using the fail promise callback
+        console.log(data);  // show any errors // best to remove for production
+      }
+
     })
-      // using the done promise callback
-      .done(function(data) {
-
-        // log data to the console so we can see
-        console.log(data); 
-
-        // here we will handle errors and validation messages
-        
-
-       })
-
-      // using the fail promise callback
-      .fail(function(data) {
-
-        // show any errors
-        // best to remove for production
-        console.log(data);
-      });
-
+      
     // stop the form from submitting the normal way and refreshing the page
-    event.preventDefault();
-
+    // event.preventDefault(); //this is not working in firefox so i use return false
+    return false;
      }
 
 
