@@ -52,7 +52,7 @@
           <span id="lastNameError" class="error">Your must have last-name</span>
         </div>
       </div>
-
+      <!--date input-->
       <div class="form-group">
         <label class="col-md-4 control-label" >Date of birth</label> 
           <div class="col-md-4 inputGroupContainer">
@@ -130,7 +130,7 @@
               <span class="input-group-addon">
                 <i class="glyphicon glyphicon-camera"></i>
               </span>
-              <input id="file-upload" class="btn btn-default form-control" type="file" name="fileUpload" accept="image/*" />
+              <input id="file-upload" class="btn btn-default form-control" type="file" name="fileUpload" accept="image/*" /> <span id="val">No file selected</span>
             </div>
             <span id="uploadError" class="error">Please upload your profile picture.</span>
         </div>
@@ -174,12 +174,22 @@
         </div>
       </div>
 
+      
     </fieldset>
     </form>
   </div>
+</div>
   <!--end of jumbotron-div-->
-  </div><!-- /.container -->
 
-
+  <div class="overlay">
+      <div class="modal">
+        <div class="graphic"></div>
+        <div class="close-btn">&#10008;</div>
+        <div class="text-box">
+          <p class="lead">Success<i class="glyphicon glyphicon-thumbs-up"></i></p>
+          <p>Thank you for your information, we will get back to you shortly.</p>
+        </div>
+      </div>
+    </div>
 </body>
 </html>
