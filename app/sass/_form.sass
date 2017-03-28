@@ -1,47 +1,169 @@
 
-*:focus
-	outline: none
-
-
-#img
-	width: 100%
-	height: 100%
-	border-radius: 50%
-
-.coverphoto
-	width: 100%
-	height: 120px
-	background: url('../images/background.jpg')
-	background-position:center center
-	border-top-right-radius: 5px
-	border-top-left-radius: 5px
-	border-bottom: 1px solid rgba(0,0,0,0.1)
+body
 	position: relative
-	.profile_picture
-		width: 110px
-		height: 110px
-		background: rgba(255,255,255,1)
-		position: absolute
-		top: 65px
-		left: 40px
-		border-radius: 100%
-		background-image: url('../images/profile.png')
-		background-size: 100% 100%
-		padding: 7px
-		border: 4px solid rgba(255,255,255,1)
+	.container
+		position: relative
+		margin: auto
+		min-width: 320px
 
-.isRed
-	transition: all 1s ease
-	border: 1px solid $red
+		#img
+			width: 100%
+			height: 100%
+			border-radius: 50%
 
-	.glyphicon
-		transition: all 1s ease
-		color: $red
+		.coverphoto
+			width: 100%
+			height: 120px
+			background: url('../images/background.jpg')
+			background-position:center center
+			border-top-right-radius: 5px
+			border-top-left-radius: 5px
+			border-bottom: 1px solid rgba(0,0,0,0.1)
+			position: relative
 
-	
-.error
-	color: $red
-	display: none
+			.profile_picture
+				width: 110px
+				height: 110px
+				background: rgba(255,255,255,1)
+				position: absolute
+				top: 65px
+				left: 40px
+				border-radius: 100%
+				background-image: url('../images/profile.png')
+				background-size: 100% 100%
+				padding: 7px
+				border: 4px solid rgba(255,255,255,1)
 
-#success_message
-	display: none
+		.isRed
+			transition: all 1s ease
+			border: 1px solid $red
+
+			.glyphicon
+				transition: all 1s ease
+				color: $red
+
+		#file-upload
+			min-width: 155px
+			text-indent: -9999px
+			color: transparent
+			
+		#val
+			position: absolute
+			top: 0
+			left: 40px
+			right: 0
+			height: 34px
+			line-height: 34px
+			padding-left: 15px
+			z-index: 2
+			cursor: pointer
+			&:hover
+				background: #e6e6e6
+					
+			
+		.error
+			color: $red
+			display: none
+
+		#success_message
+			display: none
+
+
+	// Overlay
+
+	.overlay
+		pointer-events: none
+		background-color: rgba(149, 197, 51, 0.9)
+		transition: all 500ms ease-in-out
+		opacity: 0
+		
+		&.is-open
+			position: absolute
+			top: 0
+			left: 0
+			right: 0
+			bottom: 0
+			z-index: 99
+			border-radius: 5px
+			opacity: 1
+			pointer-events: auto
+
+			.modal
+				
+		    	transform: translate(0px, 0px)
+
+
+		.modal
+			//transform: translate(-25%, 25%)
+			min-width: 300px
+			max-width: 700px
+			background: white
+			padding: 30px
+			box-shadow: 0px 4px 20px rgba(0,0,0,0.4)
+			transform: translate(0px, -200px)
+			transition: all 500ms cubic-bezier(0.25, 0.35, 0, 1.74)
+			position: relative
+			top: 25%
+			display: block
+			
+			//overflow: hidden
+
+			.graphic
+				width: 100%
+				height: 60px
+				background: url('../images/background.jpg')
+				background-position: -120px;
+				border-top-right-radius: 5px
+				border-top-left-radius: 5px
+				border-bottom: 1px solid rgba(0,0,0,0.1)
+				position: relative
+
+			.close-btn
+				position: absolute
+				top: 0
+				right: 0
+				height: 30px
+				width: 30px
+				font-size: 30px
+				text-align: center
+				line-height: 30px
+				cursor: pointer
+				transition: all 100ms ease-in-out
+
+				&:hover
+					transform: scale(1.2)
+
+
+			.text-box
+				max-width: 80%
+
+				.lead
+					color: black
+					font-size: 30px
+					line-height: 1.3
+					i
+						padding: 5px 0 0 10px
+				p
+					color: $gray
+					font-size: 18px
+
+
+
+@media screen and (min-width: 720px)
+	body
+		.overlay
+			.modal
+	  			left: 6%
+
+@media screen and (min-width: 992px)
+	body
+		.overlay
+			.modal
+	  			left: 25%
+			
+
+@media screen and (min-width: 992px)
+	.container
+		.overlay
+			.modal
+	  			transform: translate(25vh, 25vh)
